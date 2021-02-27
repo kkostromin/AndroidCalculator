@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    <!-- задание 1 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView*  с размером 20sp и и шириной, равной ems * ширину самой широкой буквы в шрифте"
+        android:textSize="20sp"
+        android:ems="10"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView in red and monospaced font"
+        android:textColor="#ff0000"
+        android:fontFamily="serif-monospace"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поле ввода с внутренним отступом"
+        android:padding="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Кнопка с внешним отступом слева"
+        android:layout_marginLeft="30dp"/>
+
+    <Switch
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Переключатель с текстом справа, включеный по умолчанию"
+        android:checked="true"
+        android:gravity="right"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Галочка с жирным, курсивным шрифтом"
+        android:textStyle="bold|italic"/>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>
