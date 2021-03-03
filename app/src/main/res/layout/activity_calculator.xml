@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/main_padding"
+    android:background="@drawable/background"> <!-- Задание 3 -->
+    <!-- Задание 1.
+        Выбрал ConstraintLayout, т.к. он считается самым новым контейнером,
+        который обновляется как зависимость и который Google постоянно обновляет. -->
+
+    <!-- Задание 2 -->
+    <!-- C, %, ÷ -->
+    <Button
+        android:id="@+id/button_clear_id"
+        android:layout_width="@dimen/zero_size"
+        android:layout_height="wrap_content"
+        android:text="@string/button_clear"
+        app:layout_constraintBottom_toTopOf="@+id/button_seven_id"
+        app:layout_constraintStart_toStartOf="@id/button_seven_id"
+        app:layout_constraintEnd_toEndOf="@id/button_eight_id"/>
+
+    <Button
+        android:id="@+id/button_percent_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_percent"
+        app:layout_constraintBottom_toTopOf="@+id/button_nine_id"
+        app:layout_constraintStart_toEndOf="@id/button_clear_id"
+        app:layout_constraintEnd_toStartOf="@id/button_divide_id"/>
+
+    <Button
+        android:id="@+id/button_divide_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_divide"
+        app:layout_constraintBottom_toTopOf="@+id/button_multiply_id"
+        app:layout_constraintStart_toEndOf="@id/button_percent_id"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 7, 8, 9, * -->
+    <Button
+        android:id="@+id/button_seven_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_seven"
+        app:layout_constraintBottom_toTopOf="@+id/button_four_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_eight_id"/>
+
+    <Button
+        android:id="@+id/button_eight_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_eight"
+        app:layout_constraintBottom_toTopOf="@+id/button_five_id"
+        app:layout_constraintStart_toEndOf="@id/button_four_id"
+        app:layout_constraintEnd_toStartOf="@id/button_nine_id"/>
+
+    <Button
+        android:id="@+id/button_nine_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_nine"
+        app:layout_constraintBottom_toTopOf="@+id/button_sex_id"
+        app:layout_constraintStart_toEndOf="@id/button_eight_id"
+        app:layout_constraintEnd_toStartOf="@id/button_multiply_id"/>
+
+    <Button
+        android:id="@+id/button_multiply_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_multiply"
+        app:layout_constraintBottom_toTopOf="@+id/button_minus_id"
+        app:layout_constraintStart_toEndOf="@id/button_nine_id"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 4, 5, 6, - -->
+    <Button
+        android:id="@+id/button_four_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_four"
+        app:layout_constraintBottom_toTopOf="@+id/button_one_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_five_id"/>
+
+    <Button
+        android:id="@+id/button_five_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_five"
+        app:layout_constraintBottom_toTopOf="@+id/button_two_id"
+        app:layout_constraintStart_toEndOf="@id/button_four_id"
+        app:layout_constraintEnd_toStartOf="@id/button_sex_id"/>
+
+    <Button
+        android:id="@+id/button_sex_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_sex"
+        app:layout_constraintBottom_toTopOf="@+id/button_three_id"
+        app:layout_constraintStart_toEndOf="@id/button_five_id"
+        app:layout_constraintEnd_toStartOf="@id/button_minus_id"/>
+
+    <Button
+        android:id="@+id/button_minus_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_minus"
+        app:layout_constraintBottom_toTopOf="@+id/button_plus_id"
+        app:layout_constraintStart_toEndOf="@id/button_sex_id"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 1, 2, 3 -->
+    <Button
+        android:id="@+id/button_one_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_one"
+        app:layout_constraintBottom_toTopOf="@+id/button_zero_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_two_id"/>
+
+    <Button
+        android:id="@+id/button_two_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_two"
+        app:layout_constraintBottom_toTopOf="@+id/button_point_id"
+        app:layout_constraintStart_toEndOf="@id/button_one_id"
+        app:layout_constraintEnd_toStartOf="@id/button_three_id"/>
+
+    <Button
+        android:id="@+id/button_three_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_three"
+        app:layout_constraintBottom_toTopOf="@+id/button_total_id"
+        app:layout_constraintStart_toEndOf="@id/button_two_id"
+        app:layout_constraintEnd_toStartOf="@id/button_plus_id"/>
+
+    <!-- 0, ., =, + -->
+    <Button
+        android:id="@+id/button_zero_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_zero"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_point_id"/>
+
+    <Button
+        android:id="@+id/button_point_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_point"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_zero_id"
+        app:layout_constraintEnd_toStartOf="@id/button_total_id"/>
+
+    <Button
+        android:id="@+id/button_total_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_total"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_point_id"
+        app:layout_constraintEnd_toStartOf="@id/button_plus_id"/>
+
+    <Button
+        android:id="@+id/button_plus_id"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zero_size"
+        android:text="@string/button_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_total_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/button_three_id"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
