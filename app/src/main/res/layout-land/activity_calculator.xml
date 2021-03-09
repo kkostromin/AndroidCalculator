@@ -11,31 +11,35 @@
     <!-- история операций -->
     <EditText
         android:id="@+id/history_id"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/zero_size"
         android:layout_height="wrap_content"
         style="@style/CalculationInputLine"
         android:textSize="@dimen/calculation_text_history_size"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/button_divide_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_divide_id"/>
 
     <!-- результат -->
     <EditText
         android:id="@+id/result_id"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/zero_size"
         android:layout_height="wrap_content"
         style="@style/CalculationInputLine"
         android:textStyle="bold"
         android:textSize="@dimen/calculation_text_result_size"
-        app:layout_constraintTop_toBottomOf="@+id/history_id"/>
+        app:layout_constraintTop_toBottomOf="@+id/history_id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/history_id"/>
 
-    <!-- C, %, ÷ -->
+    <!-- ÷, %, C  -->
     <Button
-        android:id="@+id/button_clear_id"
-        android:layout_width="@dimen/zero_size"
+        android:id="@+id/button_divide_id"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_clear"
-        app:layout_constraintBottom_toTopOf="@+id/button_seven_id"
-        app:layout_constraintStart_toStartOf="@id/button_seven_id"
-        app:layout_constraintEnd_toEndOf="@id/button_eight_id"
+        android:text="@string/button_divide"
+        app:layout_constraintBottom_toTopOf="@+id/button_multiply_id"
+        app:layout_constraintStart_toStartOf="@id/button_multiply_id"
+        app:layout_constraintStart_toEndOf="@id/button_percent_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <Button
@@ -43,22 +47,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_percent"
-        app:layout_constraintBottom_toTopOf="@+id/button_nine_id"
-        app:layout_constraintStart_toEndOf="@id/button_clear_id"
-        app:layout_constraintEnd_toStartOf="@id/button_divide_id"
+        app:layout_constraintBottom_toTopOf="@+id/button_minus_id"
+        app:layout_constraintStart_toEndOf="@id/button_divide_id"
+        app:layout_constraintEnd_toStartOf="@id/button_clear_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <Button
-        android:id="@+id/button_divide_id"
+        android:id="@+id/button_clear_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_divide"
-        app:layout_constraintBottom_toTopOf="@+id/button_multiply_id"
+        android:text="@string/button_clear"
+        app:layout_constraintBottom_toTopOf="@+id/button_plus_id"
         app:layout_constraintStart_toEndOf="@id/button_percent_id"
-        app:layout_constraintEnd_toEndOf="@id/button_plus_id"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
-    <!-- 7, 8, 9, * -->
+    <!--*, -, + -->
+    <Button
+        android:id="@+id/button_multiply_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_multiply"
+        app:layout_constraintBottom_toTopOf="@+id/button_seven_id"
+        app:layout_constraintStart_toStartOf="@id/button_seven_id"
+        app:layout_constraintEnd_toStartOf="@id/button_minus_id"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <Button
+        android:id="@+id/button_minus_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_minus"
+        app:layout_constraintBottom_toTopOf="@+id/button_eight_id"
+        app:layout_constraintStart_toEndOf="@id/button_multiply_id"
+        app:layout_constraintEnd_toStartOf="@id/button_plus_id"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <Button
+        android:id="@+id/button_plus_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_plus"
+        app:layout_constraintBottom_toTopOf="@+id/button_nine_id"
+        app:layout_constraintStart_toEndOf="@id/button_minus_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+    <!-- 7, 8, 9 -->
     <Button
         android:id="@+id/button_seven_id"
         android:layout_width="wrap_content"
@@ -86,20 +121,10 @@
         android:text="@string/button_nine"
         app:layout_constraintBottom_toTopOf="@+id/button_sex_id"
         app:layout_constraintStart_toEndOf="@id/button_eight_id"
-        app:layout_constraintEnd_toStartOf="@id/button_multiply_id"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
-    <Button
-        android:id="@+id/button_multiply_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_multiply"
-        app:layout_constraintBottom_toTopOf="@+id/button_minus_id"
-        app:layout_constraintStart_toEndOf="@id/button_nine_id"
-        app:layout_constraintEnd_toEndOf="@id/button_plus_id"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
-
-    <!-- 4, 5, 6, - -->
+    <!-- 4, 5, 6 -->
     <Button
         android:id="@+id/button_four_id"
         android:layout_width="wrap_content"
@@ -127,17 +152,7 @@
         android:text="@string/button_sex"
         app:layout_constraintBottom_toTopOf="@+id/button_three_id"
         app:layout_constraintStart_toEndOf="@id/button_five_id"
-        app:layout_constraintEnd_toStartOf="@id/button_minus_id"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
-
-    <Button
-        android:id="@+id/button_minus_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_minus"
-        app:layout_constraintBottom_toTopOf="@+id/button_plus_id"
-        app:layout_constraintStart_toEndOf="@id/button_sex_id"
-        app:layout_constraintEnd_toEndOf="@id/button_plus_id"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <!-- 1, 2, 3 -->
@@ -168,10 +183,10 @@
         android:text="@string/button_three"
         app:layout_constraintBottom_toTopOf="@+id/button_total_id"
         app:layout_constraintStart_toEndOf="@id/button_two_id"
-        app:layout_constraintEnd_toStartOf="@id/button_plus_id"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
-    <!-- 0, ., =, + -->
+    <!-- 0, ., = -->
     <Button
         android:id="@+id/button_zero_id"
         android:layout_width="wrap_content"
@@ -199,17 +214,5 @@
         android:text="@string/button_total"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_point_id"
-        app:layout_constraintEnd_toStartOf="@id/button_plus_id"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
-
-    <Button
-        android:id="@+id/button_plus_id"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/zero_size"
-        android:text="@string/button_plus"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_total_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/button_three_id"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
+        app:layout_constraintHorizontal_chainStyle="packed" />
 </androidx.constraintlayout.widget.ConstraintLayout>
