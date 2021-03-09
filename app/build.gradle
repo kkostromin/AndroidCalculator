@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
     defaultConfig {
-        applicationId "ru.kirea.androidplatform"
+        applicationId "ru.kirea.androidcalculator"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

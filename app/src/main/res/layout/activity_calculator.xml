@@ -4,12 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/main_padding"
-    android:background="@drawable/background"> <!-- Задание 3 -->
-    <!-- Задание 1.
-        Выбрал ConstraintLayout, т.к. он считается самым новым контейнером,
-        который обновляется как зависимость и который Google постоянно обновляет. -->
+    android:background="@drawable/background">
 
-    <!-- Задание 2 -->
     <!-- C, %, ÷ -->
     <Button
         android:id="@+id/button_clear_id"
