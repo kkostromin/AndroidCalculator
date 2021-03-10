@@ -1,4 +1,4 @@
-package ru.kirea.androidcalculator;
+package ru.kirea.androidcalculator.ui;
 
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -7,10 +7,12 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import ru.kirea.androidcalculator.R;
+import ru.kirea.androidcalculator.uimodel.CalculatorPresenter;
 
 public class ActivityCalculator extends AppCompatActivity {
 
-    private StringCalculatorHelper stringCalculatorHelper;
+    private CalculatorPresenter calculatorPresenter;
     private SparseArray<String> buttonValueMapping;
     private EditText history;
     private EditText result;
@@ -22,7 +24,7 @@ public class ActivityCalculator extends AppCompatActivity {
 
         history = findViewById(R.id.history_id);
         result = findViewById(R.id.result_id);
-        stringCalculatorHelper = new StringCalculatorHelper();
+        calculatorPresenter = new CalculatorPresenter();
 
         buttonValueMapping = new SparseArray<>();
         initButtonValueMapping();
@@ -58,13 +60,13 @@ public class ActivityCalculator extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        stringCalculatorHelper.saveInstanceState(outState);
+        calculatorPresenter.saveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        stringCalculatorHelper.restoreInstanceState(savedInstanceState);
+        calculatorPresenter.restoreInstanceState(savedInstanceState);
     }
 
     private void initButton() {
@@ -94,40 +96,14 @@ public class ActivityCalculator extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            calculationOperation(v);
+            calculatorPresenter.calculationOperation(v, buttonValueMapping.get(v.getId(), null));
+            showResult();
         }
     };
 
-    private void calculationOperation(View v) {
-        int id = v.getId();
-
-        if (id == R.id.button_clear_id) {
-            stringCalculatorHelper = new StringCalculatorHelper();
-        } else if (id == R.id.button_total_id) {
-            stringCalculatorHelper.calculate();
-        } else if (id == R.id.button_percent_id) {
-            stringCalculatorHelper.setPercent();
-        } else if (id == R.id.button_zero_id
-                || id == R.id.button_one_id
-                || id == R.id.button_two_id
-                || id == R.id.button_three_id
-                || id == R.id.button_four_id
-                || id == R.id.button_five_id
-                || id == R.id.button_sex_id
-                || id == R.id.button_seven_id
-                || id == R.id.button_eight_id
-                || id == R.id.button_nine_id
-                || id == R.id.button_point_id) {
-            stringCalculatorHelper.setValue(buttonValueMapping.get(id, null));
-        } else {
-            stringCalculatorHelper.setOperation(buttonValueMapping.get(id, null));
-        }
-        showResult();
-    }
-
     private void showResult() {
-        history.setText(stringCalculatorHelper.getHistory());
-        result.setText(stringCalculatorHelper.getResult());
+        history.setText(calculatorPresenter.getHistory());
+        result.setText(calculatorPresenter.getResult());
 
         history.setSelection(history.getText().length());
         result.setSelection(result.getText().length());

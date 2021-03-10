@@ -1,4 +1,4 @@
-package ru.kirea.androidcalculator;
+package ru.kirea.androidcalculator.core;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.kirea.androidcalculator.core.CalculationItem;
 
 //данные и операции калькулятора
 public class StringCalculatorHelper {

@@ -1,4 +1,4 @@
-package ru.kirea.androidcalculator;
+package ru.kirea.androidcalculator.core;
 
 public interface CalculationItem {
     int ITEM_VALUE = 1; //значение в калькуляторе
