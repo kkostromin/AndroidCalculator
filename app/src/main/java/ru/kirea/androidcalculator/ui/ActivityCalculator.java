@@ -5,17 +5,22 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.material.button.MaterialButtonToggleGroup;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import ru.kirea.androidcalculator.App;
 import ru.kirea.androidcalculator.R;
 import ru.kirea.androidcalculator.uimodel.CalculatorPresenter;
 
-public class ActivityCalculator extends AppCompatActivity {
+public class ActivityCalculator extends BaseActivity {
 
     private CalculatorPresenter calculatorPresenter;
     private SparseArray<String> buttonValueMapping;
     private EditText history;
     private EditText result;
+    private MaterialButtonToggleGroup buttonToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,12 @@ public class ActivityCalculator extends AppCompatActivity {
 
         history = findViewById(R.id.history_id);
         result = findViewById(R.id.result_id);
-        calculatorPresenter = new CalculatorPresenter();
+        buttonToggle = findViewById(R.id.toggle_theme_id);
+        calculatorPresenter = new CalculatorPresenter(this);
+
+        if (isDarkTheme()) {
+            buttonToggle.check(R.id.button_dark_mode_id);
+        }
 
         buttonValueMapping = new SparseArray<>();
         initButtonValueMapping();
@@ -90,6 +100,13 @@ public class ActivityCalculator extends AppCompatActivity {
         findViewById(R.id.button_divide_id).setOnClickListener(clickListener); //кнопка ÷
         findViewById(R.id.button_percent_id).setOnClickListener(clickListener); //кнопка %
         findViewById(R.id.button_total_id).setOnClickListener(clickListener); //кнопка =
+
+        buttonToggle.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+            @Override
+            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                calculatorPresenter.buttonToggleChecked(checkedId, isChecked);
+            }
+        });
     }
 
     //обработка нажатий

@@ -1,15 +1,21 @@
 package ru.kirea.androidcalculator.uimodel;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import ru.kirea.androidcalculator.AppConstants;
 import ru.kirea.androidcalculator.R;
 import ru.kirea.androidcalculator.core.StringCalculatorHelper;
 
 public class CalculatorPresenter {
     private StringCalculatorHelper stringCalculatorHelper;
+    private Context context;
 
-    public CalculatorPresenter() {
+    public CalculatorPresenter(Context context) {
+        this.context = context;
         stringCalculatorHelper = new StringCalculatorHelper();
     }
 
@@ -46,6 +52,17 @@ public class CalculatorPresenter {
             stringCalculatorHelper.setValue(value);
         } else {
             stringCalculatorHelper.setOperation(value);
+        }
+    }
+
+    //обработка нажатия по кнопкам-переключателям
+    public void buttonToggleChecked(int buttonId, boolean isChecked) {
+        if (buttonId == R.id.button_dark_mode_id) { //кнопка переключения темной темы
+            SharedPreferences sharedPref = context.getSharedPreferences(AppConstants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt(AppConstants.THEME_ID, isChecked ? 1 : 0);
+            editor.apply();
+            ((Activity)context).recreate();
         }
     }
 
