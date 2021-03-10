@@ -42,6 +42,7 @@
         android:textSize="@dimen/calculation_text_result_size"
         app:layout_constraintTop_toBottomOf="@+id/history_id"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_divide_id"
         app:layout_constraintEnd_toEndOf="@+id/history_id"/>
 
     <!-- ÷, %, C  -->
@@ -50,8 +51,7 @@
         style="@style/Buttons"
         android:text="@string/button_divide"
         app:layout_constraintBottom_toTopOf="@+id/button_multiply_id"
-        app:layout_constraintStart_toStartOf="@id/button_multiply_id"
-        app:layout_constraintStart_toEndOf="@id/button_percent_id"
+        app:layout_constraintEnd_toStartOf="@id/button_percent_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
     <com.google.android.material.button.MaterialButton
@@ -59,7 +59,6 @@
         style="@style/Buttons"
         android:text="@string/button_percent"
         app:layout_constraintBottom_toTopOf="@+id/button_minus_id"
-        app:layout_constraintStart_toEndOf="@id/button_divide_id"
         app:layout_constraintEnd_toStartOf="@id/button_clear_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -68,7 +67,6 @@
         style="@style/Buttons"
         android:text="@string/button_clear"
         app:layout_constraintBottom_toTopOf="@+id/button_plus_id"
-        app:layout_constraintStart_toEndOf="@id/button_percent_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -78,7 +76,6 @@
         style="@style/Buttons"
         android:text="@string/button_multiply"
         app:layout_constraintBottom_toTopOf="@+id/button_seven_id"
-        app:layout_constraintStart_toStartOf="@id/button_seven_id"
         app:layout_constraintEnd_toStartOf="@id/button_minus_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -87,7 +84,6 @@
         style="@style/Buttons"
         android:text="@string/button_minus"
         app:layout_constraintBottom_toTopOf="@+id/button_eight_id"
-        app:layout_constraintStart_toEndOf="@id/button_multiply_id"
         app:layout_constraintEnd_toStartOf="@id/button_plus_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -96,7 +92,6 @@
         style="@style/Buttons"
         android:text="@string/button_plus"
         app:layout_constraintBottom_toTopOf="@+id/button_nine_id"
-        app:layout_constraintStart_toEndOf="@id/button_minus_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -106,7 +101,6 @@
         style="@style/Buttons"
         android:text="@string/button_seven"
         app:layout_constraintBottom_toTopOf="@+id/button_four_id"
-        app:layout_constraintStart_toStartOf="@id/button_four_id"
         app:layout_constraintEnd_toStartOf="@id/button_eight_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -115,7 +109,6 @@
         style="@style/Buttons"
         android:text="@string/button_eight"
         app:layout_constraintBottom_toTopOf="@+id/button_five_id"
-        app:layout_constraintStart_toEndOf="@id/button_four_id"
         app:layout_constraintEnd_toStartOf="@id/button_nine_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -124,7 +117,6 @@
         style="@style/Buttons"
         android:text="@string/button_nine"
         app:layout_constraintBottom_toTopOf="@+id/button_sex_id"
-        app:layout_constraintStart_toEndOf="@id/button_eight_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -134,7 +126,6 @@
         style="@style/Buttons"
         android:text="@string/button_four"
         app:layout_constraintBottom_toTopOf="@+id/button_one_id"
-        app:layout_constraintStart_toStartOf="@id/button_one_id"
         app:layout_constraintEnd_toStartOf="@id/button_five_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -143,7 +134,6 @@
         style="@style/Buttons"
         android:text="@string/button_five"
         app:layout_constraintBottom_toTopOf="@+id/button_two_id"
-        app:layout_constraintStart_toEndOf="@id/button_four_id"
         app:layout_constraintEnd_toStartOf="@id/button_sex_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -152,7 +142,6 @@
         style="@style/Buttons"
         android:text="@string/button_sex"
         app:layout_constraintBottom_toTopOf="@+id/button_three_id"
-        app:layout_constraintStart_toEndOf="@id/button_five_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -162,7 +151,6 @@
         style="@style/Buttons"
         android:text="@string/button_one"
         app:layout_constraintBottom_toTopOf="@+id/button_zero_id"
-        app:layout_constraintStart_toStartOf="@id/button_zero_id"
         app:layout_constraintEnd_toStartOf="@id/button_two_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -171,7 +159,6 @@
         style="@style/Buttons"
         android:text="@string/button_two"
         app:layout_constraintBottom_toTopOf="@+id/button_point_id"
-        app:layout_constraintStart_toEndOf="@id/button_one_id"
         app:layout_constraintEnd_toStartOf="@id/button_three_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -180,7 +167,6 @@
         style="@style/Buttons"
         android:text="@string/button_three"
         app:layout_constraintBottom_toTopOf="@+id/button_total_id"
-        app:layout_constraintStart_toEndOf="@id/button_two_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -190,7 +176,6 @@
         style="@style/Buttons"
         android:text="@string/button_zero"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_point_id"
         app:layout_constraintHorizontal_chainStyle="packed"/>
 
@@ -199,7 +184,6 @@
         style="@style/Buttons"
         android:text="@string/button_point"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_zero_id"
         app:layout_constraintEnd_toStartOf="@id/button_total_id"/>
 
     <com.google.android.material.button.MaterialButton
@@ -207,6 +191,6 @@
         style="@style/Buttons"
         android:text="@string/button_total"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_point_id"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed" />
 </androidx.constraintlayout.widget.ConstraintLayout>
