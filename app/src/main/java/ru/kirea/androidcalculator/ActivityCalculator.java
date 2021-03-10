@@ -1,8 +1,8 @@
 package ru.kirea.androidcalculator;
 
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ActivityCalculator extends AppCompatActivity {
 
     private StringCalculatorHelper stringCalculatorHelper;
+    private SparseArray<String> buttonValueMapping;
     private EditText history;
     private EditText result;
 
@@ -21,11 +22,37 @@ public class ActivityCalculator extends AppCompatActivity {
 
         history = findViewById(R.id.history_id);
         result = findViewById(R.id.result_id);
-
         stringCalculatorHelper = new StringCalculatorHelper();
 
-        //Задание 1 - вешаем обаботчик на кнопки
+        buttonValueMapping = new SparseArray<>();
+        initButtonValueMapping();
+
+        //вешаем обаботчик на кнопки
         initButton();
+    }
+
+    //связка кнопок с их значениями
+    private void initButtonValueMapping() {
+        buttonValueMapping.put(R.id.button_clear_id, getString(R.string.button_clear));
+
+        buttonValueMapping.put(R.id.button_zero_id, getString(R.string.button_zero));
+        buttonValueMapping.put(R.id.button_one_id, getString(R.string.button_one));
+        buttonValueMapping.put(R.id.button_two_id, getString(R.string.button_two));
+        buttonValueMapping.put(R.id.button_three_id, getString(R.string.button_three));
+        buttonValueMapping.put(R.id.button_four_id, getString(R.string.button_four));
+        buttonValueMapping.put(R.id.button_five_id, getString(R.string.button_five));
+        buttonValueMapping.put(R.id.button_sex_id, getString(R.string.button_sex));
+        buttonValueMapping.put(R.id.button_seven_id, getString(R.string.button_seven));
+        buttonValueMapping.put(R.id.button_eight_id, getString(R.string.button_eight));
+        buttonValueMapping.put(R.id.button_nine_id, getString(R.string.button_nine));
+        buttonValueMapping.put(R.id.button_point_id, getString(R.string.button_point));
+
+        buttonValueMapping.put(R.id.button_plus_id, getString(R.string.button_plus));
+        buttonValueMapping.put(R.id.button_minus_id, getString(R.string.button_minus));
+        buttonValueMapping.put(R.id.button_multiply_id, getString(R.string.button_multiply));
+        buttonValueMapping.put(R.id.button_divide_id, getString(R.string.button_divide));
+        buttonValueMapping.put(R.id.button_percent_id, getString(R.string.button_percent));
+        buttonValueMapping.put(R.id.button_total_id, getString(R.string.button_total));
     }
 
     @Override
@@ -67,31 +94,33 @@ public class ActivityCalculator extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            calculationOperation(((Button) v).getText().toString());
+            calculationOperation(v);
         }
     };
 
-    private void calculationOperation(String buttonText) {
-        if (buttonText.equals(getString(R.string.button_clear))) {
+    private void calculationOperation(View v) {
+        int id = v.getId();
+
+        if (id == R.id.button_clear_id) {
             stringCalculatorHelper = new StringCalculatorHelper();
-        } else if (buttonText.equals(getString(R.string.button_total))) {
+        } else if (id == R.id.button_total_id) {
             stringCalculatorHelper.calculate();
-        } else if (buttonText.equals(getString(R.string.button_percent))) {
+        } else if (id == R.id.button_percent_id) {
             stringCalculatorHelper.setPercent();
-        } else if (buttonText.equals(getString(R.string.button_zero))
-                || buttonText.equals(getString(R.string.button_one))
-                || buttonText.equals(getString(R.string.button_two))
-                || buttonText.equals(getString(R.string.button_three))
-                || buttonText.equals(getString(R.string.button_four))
-                || buttonText.equals(getString(R.string.button_five))
-                || buttonText.equals(getString(R.string.button_sex))
-                || buttonText.equals(getString(R.string.button_seven))
-                || buttonText.equals(getString(R.string.button_eight))
-                || buttonText.equals(getString(R.string.button_nine))
-                || buttonText.equals(getString(R.string.button_point))) {
-            stringCalculatorHelper.setValue(buttonText);
+        } else if (id == R.id.button_zero_id
+                || id == R.id.button_one_id
+                || id == R.id.button_two_id
+                || id == R.id.button_three_id
+                || id == R.id.button_four_id
+                || id == R.id.button_five_id
+                || id == R.id.button_sex_id
+                || id == R.id.button_seven_id
+                || id == R.id.button_eight_id
+                || id == R.id.button_nine_id
+                || id == R.id.button_point_id) {
+            stringCalculatorHelper.setValue(buttonValueMapping.get(id, null));
         } else {
-            stringCalculatorHelper.setOperation(buttonText);
+            stringCalculatorHelper.setOperation(buttonValueMapping.get(id, null));
         }
         showResult();
     }

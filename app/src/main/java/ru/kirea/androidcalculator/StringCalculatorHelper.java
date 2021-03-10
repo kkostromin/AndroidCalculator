@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-//Задание 2 - данные и операции калькулятора
+//данные и операции калькулятора
 public class StringCalculatorHelper {
     private final String KEY_BUNDLE = "calculationSetting";
     private final String KEY_OPERATION_TYPE = "o";
@@ -24,27 +24,31 @@ public class StringCalculatorHelper {
 
     //задать операцию
     public void setOperation(String value) {
-        CalculationItem item = getLastItem();
-        boolean asLast = !(item != null && item.getItemType() == CalculationItem.ITEM_OPERATION);
-        //в начале формулы можно только минус вводить
-        if (!history.isEmpty() || value.equals("-")) {
-            setLastItem(new ItemOperation(value), asLast);
+        if (value != null) {
+            CalculationItem item = getLastItem();
+            boolean asLast = !(item != null && item.getItemType() == CalculationItem.ITEM_OPERATION);
+            //в начале формулы можно только минус вводить
+            if (!history.isEmpty() || value.equals("-")) {
+                setLastItem(new ItemOperation(value), asLast);
+            }
         }
     }
 
     //задать значение
     public void setValue(String value) {
-        CalculationItem item = getLastItem();
-        String oldValue = "";
-        boolean asLast = true;
-        if (item != null && item.getItemType() == CalculationItem.ITEM_VALUE) {
-            asLast = false;
-            oldValue = item.getValue();
-        }
+        if (value != null) {
+            CalculationItem item = getLastItem();
+            String oldValue = "";
+            boolean asLast = true;
+            if (item != null && item.getItemType() == CalculationItem.ITEM_VALUE) {
+                asLast = false;
+                oldValue = item.getValue();
+            }
 
-        //две точки не может быть
-        if (!value.equals(".") || !oldValue.contains(".")) {
-            setLastItem(new ItemValue(oldValue + value), asLast);
+            //две точки не может быть
+            if (!value.equals(".") || !oldValue.contains(".")) {
+                setLastItem(new ItemValue(oldValue + value), asLast);
+            }
         }
     }
 
