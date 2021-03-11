@@ -8,13 +8,11 @@ import android.widget.EditText;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import ru.kirea.androidcalculator.App;
 import ru.kirea.androidcalculator.R;
 import ru.kirea.androidcalculator.uimodel.CalculatorPresenter;
+import ru.kirea.androidcalculator.uimodel.CalculatorView;
 
-public class ActivityCalculator extends BaseActivity {
+public class ActivityCalculator extends BaseActivity implements CalculatorView {
 
     private CalculatorPresenter calculatorPresenter;
     private SparseArray<String> buttonValueMapping;
@@ -30,7 +28,7 @@ public class ActivityCalculator extends BaseActivity {
         history = findViewById(R.id.history_id);
         result = findViewById(R.id.result_id);
         buttonToggle = findViewById(R.id.toggle_theme_id);
-        calculatorPresenter = new CalculatorPresenter(this);
+        calculatorPresenter = new CalculatorPresenter(this, this);
 
         if (isDarkTheme()) {
             buttonToggle.check(R.id.button_dark_mode_id);
@@ -77,6 +75,11 @@ public class ActivityCalculator extends BaseActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         calculatorPresenter.restoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 
     private void initButton() {

@@ -1,6 +1,5 @@
 package ru.kirea.androidcalculator.uimodel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,10 +11,12 @@ import ru.kirea.androidcalculator.core.StringCalculatorHelper;
 
 public class CalculatorPresenter {
     private StringCalculatorHelper stringCalculatorHelper;
+    private CalculatorView calculatorView;
     private Context context;
 
-    public CalculatorPresenter(Context context) {
+    public CalculatorPresenter(Context context, CalculatorView calculatorView) {
         this.context = context;
+        this.calculatorView = calculatorView;
         stringCalculatorHelper = new StringCalculatorHelper();
     }
 
@@ -62,7 +63,7 @@ public class CalculatorPresenter {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putInt(AppConstants.THEME_ID, isChecked ? 1 : 0);
             editor.apply();
-            ((Activity)context).recreate();
+            calculatorView.recreateActivity();
         }
     }
 
