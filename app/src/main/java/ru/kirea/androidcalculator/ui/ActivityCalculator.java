@@ -30,7 +30,7 @@ public class ActivityCalculator extends BaseActivity implements CalculatorView {
         buttonToggle = findViewById(R.id.toggle_theme_id);
         calculatorPresenter = new CalculatorPresenter(this, this);
 
-        if (isDarkTheme()) {
+        if (calculatorPresenter.isDarkTheme()) {
             buttonToggle.check(R.id.button_dark_mode_id);
         }
 
