@@ -1,11 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorDefaultPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDefaultPrimaryDark</item>
+        <item name="colorAccent">@color/colorDefaultAccent</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.MaterialComponents">
+        <item name="colorPrimary">@color/colorDarkPrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkPrimaryDark</item>
+        <item name="colorAccent">@color/colorDarkAccent</item>
     </style>
 
     <!-- стиль поля ввода в калькуляторе -->
@@ -16,6 +21,23 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:focusable">false</item>
         <item name="android:longClickable">false</item>
+    </style>
+
+    <!-- стиль иконки кнопки темной темы -->
+    <style name="IconDark" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">@dimen/zero_size</item>
+        <item name="iconGravity">textStart</item>
+        <item name="icon">@drawable/icon_dark_mode</item>
+    </style>
+
+    <!-- стиль кнопок -->
+    <style name="Buttons" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/button_padding_top</item>
+        <item name="android:layout_marginBottom">@dimen/button_padding_top</item>
+        <item name="android:layout_marginLeft">@dimen/button_padding_left</item>
+        <item name="android:layout_marginRight">@dimen/button_padding_left</item>
     </style>
 
 </resources>

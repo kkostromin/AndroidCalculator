@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="main_padding">10dp</dimen>
+    <dimen name="button_padding_top">2dp</dimen>
+    <dimen name="button_padding_left">8dp</dimen>
     <dimen name="zero_size">0dp</dimen>
 
     <dimen name="calculation_text_history_size">40sp</dimen>
