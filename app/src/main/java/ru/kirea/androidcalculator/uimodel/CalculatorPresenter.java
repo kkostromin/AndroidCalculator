@@ -1,24 +1,30 @@
 package ru.kirea.androidcalculator.uimodel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import ru.kirea.androidcalculator.R;
 import ru.kirea.androidcalculator.core.Preferences;
 import ru.kirea.androidcalculator.core.StringCalculatorHelper;
+import ru.kirea.androidcalculator.ui.ActivitySetting;
 
 public class CalculatorPresenter {
     private StringCalculatorHelper stringCalculatorHelper;
-    private CalculatorView calculatorView;
+    private BaseView baseView;
     private Preferences preferences;
-    private Context context;
 
-    public CalculatorPresenter(Context context, CalculatorView calculatorView) {
-        this.context = context;
-        this.calculatorView = calculatorView;
+    private int appTheme;
+
+    public CalculatorPresenter(Context context, BaseView baseView) {
+        this.baseView = baseView;
         stringCalculatorHelper = new StringCalculatorHelper();
         preferences = new Preferences(context);
+
+        //запоминаем тему приложения
+        appTheme = preferences.getSetting(Preferences.THEME_ID, Preferences.DEFAULT_THEME);
     }
 
     //сохранить настройки
@@ -57,14 +63,6 @@ public class CalculatorPresenter {
         }
     }
 
-    //обработка нажатия по кнопкам-переключателям
-    public void buttonToggleChecked(int buttonId, boolean isChecked) {
-        if (buttonId == R.id.button_dark_mode_id) { //кнопка переключения темной темы
-            preferences.setSetting(Preferences.THEME_ID, isChecked ? 1 : 0);
-            calculatorView.recreateActivity();
-        }
-    }
-
     //получить историю операций
     public String getHistory() {
         return stringCalculatorHelper.getHistory();
@@ -75,8 +73,19 @@ public class CalculatorPresenter {
         return stringCalculatorHelper.getResult();
     }
 
+    //обработка меню
+    public boolean optionMenuSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_value_setting) {
+            baseView.runActivity(new Intent(baseView.getContext(), ActivitySetting.class));
+            return true;
+        }
+        return false;
+    }
 
-    public boolean isDarkTheme() {
-        return preferences.isDarkTheme();
+    public void onResume() {
+        //проверим, поменялась ли тема
+        if (appTheme != preferences.getSetting(Preferences.THEME_ID, Preferences.DEFAULT_THEME)) {
+            baseView.recreateActivity();
+        }
     }
 }

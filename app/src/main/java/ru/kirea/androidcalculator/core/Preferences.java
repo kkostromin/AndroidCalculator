@@ -11,8 +11,8 @@ public class Preferences {
     public static final String THEME_ID = "themeId";
 
     //темы
-    private static final int DEFAULT_THEME = 0; //тема по умолчанию
-    private static final int DARK_THEME = 1; //темная тема
+    public static final int DEFAULT_THEME = 0; //тема по умолчанию
+    public static final int DARK_THEME = 1; //темная тема
 
     private Context context;
 

@@ -1,24 +1,26 @@
 package ru.kirea.androidcalculator.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
-import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import androidx.annotation.NonNull;
 import ru.kirea.androidcalculator.R;
 import ru.kirea.androidcalculator.uimodel.CalculatorPresenter;
-import ru.kirea.androidcalculator.uimodel.CalculatorView;
+import ru.kirea.androidcalculator.uimodel.BaseView;
 
-public class ActivityCalculator extends BaseActivity implements CalculatorView {
+public class ActivityCalculator extends BaseActivity implements BaseView {
 
     private CalculatorPresenter calculatorPresenter;
     private SparseArray<String> buttonValueMapping;
     private EditText history;
     private EditText result;
-    private MaterialButtonToggleGroup buttonToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +29,19 @@ public class ActivityCalculator extends BaseActivity implements CalculatorView {
 
         history = findViewById(R.id.history_id);
         result = findViewById(R.id.result_id);
-        buttonToggle = findViewById(R.id.toggle_theme_id);
         calculatorPresenter = new CalculatorPresenter(this, this);
-
-        if (calculatorPresenter.isDarkTheme()) {
-            buttonToggle.check(R.id.button_dark_mode_id);
-        }
 
         buttonValueMapping = new SparseArray<>();
         initButtonValueMapping();
 
         //вешаем обаботчик на кнопки
         initButton();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        calculatorPresenter.onResume();
     }
 
     //связка кнопок с их значениями
@@ -78,8 +81,31 @@ public class ActivityCalculator extends BaseActivity implements CalculatorView {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //обработка нажатия на меню
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return calculatorPresenter.optionMenuSelected(item);
+    }
+
+    @Override
     public void recreateActivity() {
         recreate();
+    }
+
+    @Override
+    public void runActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     private void initButton() {
@@ -103,13 +129,6 @@ public class ActivityCalculator extends BaseActivity implements CalculatorView {
         findViewById(R.id.button_divide_id).setOnClickListener(clickListener); //кнопка ÷
         findViewById(R.id.button_percent_id).setOnClickListener(clickListener); //кнопка %
         findViewById(R.id.button_total_id).setOnClickListener(clickListener); //кнопка =
-
-        buttonToggle.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-            @Override
-            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-                calculatorPresenter.buttonToggleChecked(checkedId, isChecked);
-            }
-        });
     }
 
     //обработка нажатий
