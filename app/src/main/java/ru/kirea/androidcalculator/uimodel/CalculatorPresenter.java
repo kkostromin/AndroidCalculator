@@ -1,24 +1,34 @@
 package ru.kirea.androidcalculator.uimodel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import ru.kirea.androidcalculator.R;
 import ru.kirea.androidcalculator.core.Preferences;
 import ru.kirea.androidcalculator.core.StringCalculatorHelper;
+import ru.kirea.androidcalculator.ui.ActivitySetting;
 
 public class CalculatorPresenter {
+    private final String KEY_FIRST_VALE = "firstValue";
+    private final String KEY_SECOND_VALE = "secondValue";
+    private final String KEY_OPERATION = "operation";
+
     private StringCalculatorHelper stringCalculatorHelper;
     private CalculatorView calculatorView;
     private Preferences preferences;
-    private Context context;
+
+    private int appTheme;
 
     public CalculatorPresenter(Context context, CalculatorView calculatorView) {
-        this.context = context;
         this.calculatorView = calculatorView;
         stringCalculatorHelper = new StringCalculatorHelper();
         preferences = new Preferences(context);
+
+        //запоминаем тему приложения
+        appTheme = preferences.getSetting(Preferences.THEME_ID, Preferences.DEFAULT_THEME);
     }
 
     //сохранить настройки
@@ -57,14 +67,6 @@ public class CalculatorPresenter {
         }
     }
 
-    //обработка нажатия по кнопкам-переключателям
-    public void buttonToggleChecked(int buttonId, boolean isChecked) {
-        if (buttonId == R.id.button_dark_mode_id) { //кнопка переключения темной темы
-            preferences.setSetting(Preferences.THEME_ID, isChecked ? 1 : 0);
-            calculatorView.recreateActivity();
-        }
-    }
-
     //получить историю операций
     public String getHistory() {
         return stringCalculatorHelper.getHistory();
@@ -75,8 +77,46 @@ public class CalculatorPresenter {
         return stringCalculatorHelper.getResult();
     }
 
+    //обработка меню
+    public boolean optionMenuSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_value_setting) {
+            calculatorView.runActivity(new Intent(calculatorView.getContext(), ActivitySetting.class));
+            return true;
+        }
+        return false;
+    }
 
-    public boolean isDarkTheme() {
-        return preferences.isDarkTheme();
+    public void onResume() {
+        //проверим, поменялась ли тема
+        if (appTheme != preferences.getSetting(Preferences.THEME_ID, Preferences.DEFAULT_THEME)) {
+            calculatorView.recreateActivity();
+        }
+    }
+
+    //проставить первоначальные параметры
+    public void setFirstValues(Bundle extras) {
+        if (extras != null) {
+            double firstValue = extras.getDouble(KEY_FIRST_VALE);
+            double secondValue = extras.getDouble(KEY_SECOND_VALE);
+            char operation = extras.getChar(KEY_OPERATION);
+
+            //записываем первое число
+            if (firstValue != 0) {
+                stringCalculatorHelper = new StringCalculatorHelper();
+                stringCalculatorHelper.setValue(String.valueOf(firstValue));
+
+                //записываем операцию
+                if (stringCalculatorHelper.isAvailableOperation(operation)) {
+                    stringCalculatorHelper.setOperation(String.valueOf(operation));
+                }
+
+                //записываем второе число
+                if (secondValue != 0) {
+                    stringCalculatorHelper.setValue(String.valueOf(secondValue));
+                }
+
+                calculatorView.showResult();
+            }
+        }
     }
 }

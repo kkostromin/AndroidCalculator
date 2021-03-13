@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     android:padding="@dimen/main_padding">
 
-    <!-- кнопка переключения темы -->
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggle_theme_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:singleSelection="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_dark_mode_id"
-            style="@style/IconDark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
     <!-- история операций -->
     <EditText
         android:id="@+id/history_id"

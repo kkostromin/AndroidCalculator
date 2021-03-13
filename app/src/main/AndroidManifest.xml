@@ -9,11 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ru.kirea.androidcalculator.ui.ActivityCalculator">
+
+        <activity android:name=".ui.ActivitySetting"
+            android:label="@string/app_setting">
+        </activity>
+
+        <activity android:name=".ui.ActivityCalculator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter android:label="ru.kirea.androidcalculator.ui.ActivityCalculator">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name = "android.intent.category.DEFAULT" />
+                <category android:name = "android.intent.category.BROWSABLE" />
+                <!-- запускаем калькулятор при вызове "calculator://run" -->
+                <data android:scheme="calculator" android:host="run" />
             </intent-filter>
         </activity>
     </application>

@@ -6,23 +6,6 @@
     android:layout_height="match_parent"
     android:padding="@dimen/main_padding">
 
-    <!-- кнопка переключения темы -->
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggle_theme_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:singleSelection="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/history_id"
-        app:layout_constraintEnd_toEndOf="parent">
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_dark_mode_id"
-            style="@style/IconDark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-
     <!-- история операций -->
     <EditText
         android:id="@+id/history_id"
@@ -30,7 +13,7 @@
         android:layout_height="wrap_content"
         style="@style/CalculationInputLine"
         android:textSize="@dimen/calculation_text_history_size"
-        app:layout_constraintTop_toBottomOf="@+id/toggle_theme_id"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- результат -->
     <EditText
