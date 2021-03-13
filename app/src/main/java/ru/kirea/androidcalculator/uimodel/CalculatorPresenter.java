@@ -17,13 +17,13 @@ public class CalculatorPresenter {
     private final String KEY_OPERATION = "operation";
 
     private StringCalculatorHelper stringCalculatorHelper;
-    private CalculationView calculateView;
+    private CalculatorView calculatorView;
     private Preferences preferences;
 
     private int appTheme;
 
-    public CalculatorPresenter(Context context, CalculationView calculateView) {
-        this.calculateView = calculateView;
+    public CalculatorPresenter(Context context, CalculatorView calculatorView) {
+        this.calculatorView = calculatorView;
         stringCalculatorHelper = new StringCalculatorHelper();
         preferences = new Preferences(context);
 
@@ -80,7 +80,7 @@ public class CalculatorPresenter {
     //обработка меню
     public boolean optionMenuSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_value_setting) {
-            calculateView.runActivity(new Intent(calculateView.getContext(), ActivitySetting.class));
+            calculatorView.runActivity(new Intent(calculatorView.getContext(), ActivitySetting.class));
             return true;
         }
         return false;
@@ -89,7 +89,7 @@ public class CalculatorPresenter {
     public void onResume() {
         //проверим, поменялась ли тема
         if (appTheme != preferences.getSetting(Preferences.THEME_ID, Preferences.DEFAULT_THEME)) {
-            calculateView.recreateActivity();
+            calculatorView.recreateActivity();
         }
     }
 
@@ -115,7 +115,7 @@ public class CalculatorPresenter {
                     stringCalculatorHelper.setValue(String.valueOf(secondValue));
                 }
 
-                calculateView.showResult();
+                calculatorView.showResult();
             }
         }
     }

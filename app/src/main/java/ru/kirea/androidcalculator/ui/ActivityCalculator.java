@@ -12,10 +12,10 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import ru.kirea.androidcalculator.R;
-import ru.kirea.androidcalculator.uimodel.CalculationView;
+import ru.kirea.androidcalculator.uimodel.CalculatorView;
 import ru.kirea.androidcalculator.uimodel.CalculatorPresenter;
 
-public class ActivityCalculator extends BaseActivity implements CalculationView {
+public class ActivityCalculator extends BaseActivity implements CalculatorView {
 
     private CalculatorPresenter calculatorPresenter;
     private SparseArray<String> buttonValueMapping;
