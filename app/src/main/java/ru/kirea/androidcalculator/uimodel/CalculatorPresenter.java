@@ -12,14 +12,18 @@ import ru.kirea.androidcalculator.core.StringCalculatorHelper;
 import ru.kirea.androidcalculator.ui.ActivitySetting;
 
 public class CalculatorPresenter {
+    private final String KEY_FIRST_VALE = "firstValue";
+    private final String KEY_SECOND_VALE = "secondValue";
+    private final String KEY_OPERATION = "operation";
+
     private StringCalculatorHelper stringCalculatorHelper;
-    private BaseView baseView;
+    private CalculationView calculateView;
     private Preferences preferences;
 
     private int appTheme;
 
-    public CalculatorPresenter(Context context, BaseView baseView) {
-        this.baseView = baseView;
+    public CalculatorPresenter(Context context, CalculationView calculateView) {
+        this.calculateView = calculateView;
         stringCalculatorHelper = new StringCalculatorHelper();
         preferences = new Preferences(context);
 
@@ -76,7 +80,7 @@ public class CalculatorPresenter {
     //обработка меню
     public boolean optionMenuSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_value_setting) {
-            baseView.runActivity(new Intent(baseView.getContext(), ActivitySetting.class));
+            calculateView.runActivity(new Intent(calculateView.getContext(), ActivitySetting.class));
             return true;
         }
         return false;
@@ -85,7 +89,34 @@ public class CalculatorPresenter {
     public void onResume() {
         //проверим, поменялась ли тема
         if (appTheme != preferences.getSetting(Preferences.THEME_ID, Preferences.DEFAULT_THEME)) {
-            baseView.recreateActivity();
+            calculateView.recreateActivity();
+        }
+    }
+
+    //проставить первоначальные параметры
+    public void setFirstValues(Bundle extras) {
+        if (extras != null) {
+            double firstValue = extras.getDouble(KEY_FIRST_VALE);
+            double secondValue = extras.getDouble(KEY_SECOND_VALE);
+            char operation = extras.getChar(KEY_OPERATION);
+
+            //записываем первое число
+            if (firstValue != 0) {
+                stringCalculatorHelper = new StringCalculatorHelper();
+                stringCalculatorHelper.setValue(String.valueOf(firstValue));
+
+                //записываем операцию
+                if (stringCalculatorHelper.isAvailableOperation(operation)) {
+                    stringCalculatorHelper.setOperation(String.valueOf(operation));
+                }
+
+                //записываем второе число
+                if (secondValue != 0) {
+                    stringCalculatorHelper.setValue(String.valueOf(secondValue));
+                }
+
+                calculateView.showResult();
+            }
         }
     }
 }

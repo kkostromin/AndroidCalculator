@@ -6,9 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-
-import ru.kirea.androidcalculator.core.CalculationItem;
+import java.util.Set;
 
 //данные и операции калькулятора
 public class StringCalculatorHelper {
@@ -16,12 +17,16 @@ public class StringCalculatorHelper {
     private final String KEY_OPERATION_TYPE = "o";
     private final String KEY_VALUE = "v";
 
-    List<CalculationItem> history; //история операций
+    private List<CalculationItem> history; //история операций
+    private Set<Character> availableOperations;
     private Double result;
 
     public StringCalculatorHelper() {
         result = null;
         history = new ArrayList<>();
+        //доступные операции
+        Character[] chars = {'+', '-', '*', '÷', '/'};
+        availableOperations = new HashSet<>(Arrays.asList(chars));
     }
 
     //задать операцию
@@ -108,7 +113,7 @@ public class StringCalculatorHelper {
                         minus(curValue);
                     } else if (oldOper.equals("*")) {
                         multiply(curValue);
-                    } else if (oldOper.equals("÷")) {
+                    } else if (oldOper.equals("÷") || oldOper.equals("/")) {
                         divide(curValue);
                     }
                 }
@@ -170,6 +175,11 @@ public class StringCalculatorHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //проверить операцию
+    public boolean isAvailableOperation(char operation) {
+        return availableOperations.contains(operation);
     }
 
     //сложить

@@ -12,10 +12,10 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import ru.kirea.androidcalculator.R;
+import ru.kirea.androidcalculator.uimodel.CalculationView;
 import ru.kirea.androidcalculator.uimodel.CalculatorPresenter;
-import ru.kirea.androidcalculator.uimodel.BaseView;
 
-public class ActivityCalculator extends BaseActivity implements BaseView {
+public class ActivityCalculator extends BaseActivity implements CalculationView {
 
     private CalculatorPresenter calculatorPresenter;
     private SparseArray<String> buttonValueMapping;
@@ -36,6 +36,9 @@ public class ActivityCalculator extends BaseActivity implements BaseView {
 
         //вешаем обаботчик на кнопки
         initButton();
+
+        //подставим первоначальную операцию, если она пришла из другого приложения или окна
+        calculatorPresenter.setFirstValues(getIntent().getExtras());
     }
 
     @Override
@@ -140,7 +143,8 @@ public class ActivityCalculator extends BaseActivity implements BaseView {
         }
     };
 
-    private void showResult() {
+    @Override
+    public void showResult() {
         history.setText(calculatorPresenter.getHistory());
         result.setText(calculatorPresenter.getResult());
 
